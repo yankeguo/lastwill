@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Last Will of Guo Y.K.</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://unpkg.com/bootswatch@5.2.1/dist/flatly/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"/>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 mb-5">
+            <h3>Last Will of Guo Y.K.</h3>
+        </div>
+        <div class="col-12">
+            <p>I build an automatic disclosure system for my last will.</p>
+            <p>If I failed to renew the beacon file for 14 days, the decryption key of my last will will be disclosed
+                automatically.</p>
+        </div>
+
+        <div class="col-12">
+            <p>
+                The encrypted file is published to npm package
+                <a target="_blank" href="https://www.npmjs.com/package/guoyk93-lastwish">guoyk93-lastwish</a>.
+            </p>
+            <p>
+                You can also download from <code>unpkg.com</code>.
+            </p>
+            <p>
+                <a target="_blank" href="https://unpkg.com/guoyk93-lastwish/lastwish.txt.asc">
+                    Link to my last will (encrypted) &nbsp;&nbsp;<i class="fa fa-external-link"></i>
+                </a>
+            </p>
+        </div>
+
+        <div class="col-6">
+            <label><b>Beacon</b></label>
+            {{if .Alive}}
+                <p><b class="text-success">{{.Beacon}}</b></p>
+            {{else}}
+                <p><b class="text-danger">{{.Beacon}}</b></p>
+            {{end}}
+        </div>
+
+        <div class="col-6">
+            <label><b>Decryption Key</b></label>
+            <p><code>{{.SecretKey}}</code></p>
+        </div>
+
+        <div class="col-12 text-white">
+            <p>My beloved ones may have the chance to guess the key in advance.</p>
+            <p>It's the name of the bird, whose sound is the very first memory of my whole life.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
