@@ -12,7 +12,7 @@ import (
 const (
 	KeySecretKey = "SECRET_KEY"
 
-	DisclosureTerm = time.Hour * 24 * 14
+	DisclosureTerm = time.Hour * 24 * 1
 
 	FileTemplate = "index.gohtml"
 	FileIndex    = "index.html"
