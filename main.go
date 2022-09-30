@@ -10,61 +10,62 @@ import (
 )
 
 const (
-	KeySecretKey = "SECRET_KEY"
-
 	DisclosureTerm = time.Hour * 24 * 1
+
+	EnvKeySecret = "SECRET_KEY"
 
 	FileTemplate = "index.gohtml"
 	FileIndex    = "index.html"
 	FileBeacon   = "beacon.txt"
 )
 
-func checkBeacon() (beacon string, alive bool, err error) {
-	log.Println("checking beacon:", FileBeacon)
+func LoadBeacon() (beacon string, alive bool, err error) {
+	log.Println("loading beacon:", FileBeacon)
 
 	var buf []byte
 	if buf, err = os.ReadFile(FileBeacon); err != nil {
 		return
 	}
 
-	buf = bytes.TrimSpace(buf)
-
-	beacon = string(buf)
-
-	log.Println("beacon:", beacon)
+	log.Println("parsing beacon:", string(buf))
 
 	var t time.Time
-	if t, err = time.Parse(time.RFC3339, string(buf)); err != nil {
+	if t, err = time.Parse(time.RFC3339, string(bytes.TrimSpace(buf))); err != nil {
 		return
 	}
 
-	alive = time.Now().Sub(t) < DisclosureTerm
+	beacon, alive = t.Format("2006-01-02 15:04:05 (-0700)"), time.Now().Sub(t) < DisclosureTerm
 
+	log.Println("beacon:", beacon)
 	log.Println("beacon alive:", alive)
 
 	return
 }
 
-func renderIndex(data Data) (err error) {
-	log.Println("loading", FileTemplate)
+func RenderIndexHTML(data Data) (err error) {
+	log.Println("loading template:", FileTemplate)
 
 	var buf []byte
 	if buf, err = os.ReadFile(FileTemplate); err != nil {
 		return
 	}
 
+	log.Println("parsing template")
+
 	var tpl *template.Template
 	if tpl, err = template.New("__index__").Parse(string(buf)); err != nil {
 		return
 	}
 
-	log.Println("rendering", FileIndex)
+	log.Println("rendering:", FileIndex)
 
 	out := &bytes.Buffer{}
 
 	if err = tpl.Execute(out, data); err != nil {
 		return
 	}
+
+	log.Println("writing:", FileIndex)
 
 	if err = os.WriteFile(FileIndex, out.Bytes(), 0644); err != nil {
 		return
@@ -91,17 +92,17 @@ func main() {
 
 	var data Data
 
-	if data.Beacon, data.Alive, err = checkBeacon(); err != nil {
+	if data.Beacon, data.Alive, err = LoadBeacon(); err != nil {
 		return
 	}
 
 	if data.Alive {
 		data.SecretKey = "N/A"
 	} else {
-		data.SecretKey = strings.TrimSpace(os.Getenv(KeySecretKey))
+		data.SecretKey = strings.TrimSpace(os.Getenv(EnvKeySecret))
 	}
 
-	if err = renderIndex(data); err != nil {
+	if err = RenderIndexHTML(data); err != nil {
 		return
 	}
 

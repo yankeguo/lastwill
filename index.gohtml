@@ -37,17 +37,22 @@
             </p>
         </div>
 
-        <div class="col-12">
-            <label><b><i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp;&nbsp;Beacon</b></label>
-            {{if .Alive}}
-                <p><b class="text-success">{{.Beacon}}</b></p>
-            {{else}}
-                <p><b class="text-danger">{{.Beacon}}</b></p>
-            {{end}}
+        <div class="col-6">
+            <label>
+                <b><i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp;&nbsp;Beacon</b>
+                (
+                {{if .Alive}}
+                    <b class="text-success"><i class="fa fa-check-circle-o"></i> Alive</b>
+                {{else}}
+                    <b class="text-danger"><i class="fa fa-times-circle-o"></i> Not Alive</b>
+                {{end}}
+                )
+            </label>
+            <p><code>{{.Beacon}}</code></p>
         </div>
 
-        <div class="col-12">
-            <label><b><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;Decryption Key</b></label>
+        <div class="col-6">
+            <label><b><i class="fa fa-lock"></i>&nbsp;&nbsp;Decryption Key</b></label>
             <p><code>{{.SecretKey}}</code></p>
         </div>
 
