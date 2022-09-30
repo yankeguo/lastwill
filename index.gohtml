@@ -37,8 +37,8 @@
             </p>
         </div>
 
-        <div class="col-6">
-            <label><b>Beacon</b></label>
+        <div class="col-12">
+            <label><b><i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp;&nbsp;Beacon</b></label>
             {{if .Alive}}
                 <p><b class="text-success">{{.Beacon}}</b></p>
             {{else}}
@@ -46,8 +46,8 @@
             {{end}}
         </div>
 
-        <div class="col-6">
-            <label><b>Decryption Key</b></label>
+        <div class="col-12">
+            <label><b><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;Decryption Key</b></label>
             <p><code>{{.SecretKey}}</code></p>
         </div>
 
