@@ -31,6 +31,8 @@ jobs:
           go-version: "^1.19.0"
       - name: render index.html
         run: go run main.go
+        env:
+          SECRET_KEY: ${{secrets.SECRET_KEY}}
       - name: configure pages
         uses: actions/configure-pages@v2
       - name: upload pages artifact
