@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	DisclosureTerm = time.Hour * 24 * 1
+	DisclosureTerm = time.Hour
 
 	EnvKeySecret = "SECRET_KEY"
 
