@@ -1,63 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Yanke Guo's Last Will</title>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://unpkg.com/bootswatch@5.3.2/dist/darkly/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"/>
-</head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootswatch@5.3.2/dist/darkly/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"
+    />
+  </head>
 
-<body>
-
-<div class="container">
-    <div class="row">
+  <body>
+    <div class="container">
+      <div class="row">
         <div class="col-12 mt-5 mb-3">
-            <h3>Yanke Guo's Last Will</h3>
+          <h3>Yanke Guo's Last Will</h3>
         </div>
         <div class="col-12">
-            <p>I've built an automatic disclosure system for my last will.</p>
-            <p>If I failed to renew the beacon file for 21 days, the decryption key of my last will will be disclosed
-                automatically.</p>
+          <p>I've built an automatic disclosure system for my last will</p>
+          <p>
+            If I failed to renew the beacon file for 21 days, the decryption key
+            of my last will will be disclosed automatically
+          </p>
         </div>
 
         <div class="col-12">
-            <p>
-                The encrypted file is already published to a npm package
-                <a target="_blank" href="https://www.npmjs.com/package/@yankeguo/lastwill-data">@yankeguo/lastwill-data</a>.
-            </p>
-            <p>
-                You can also download it directly from <code>unpkg.com</code> via the link below:
-            </p>
-            <p>
-                <a target="_blank" href="https://unpkg.com/@yankeguo/lastwill-data/lastwill.txt.asc">
-                    Link to my last will (encrypted) &nbsp;&nbsp;<i class="fa fa-external-link"></i>
-                </a>
-            </p>
+          <p>
+            The encrypted file is already published to a npm package
+            <a
+              target="_blank"
+              href="https://www.npmjs.com/package/@yankeguo/lastwill-data"
+              >@yankeguo/lastwill-data</a
+            >
+            , or you can
+            <a
+              target="_blank"
+              href="https://unpkg.com/@yankeguo/lastwill-data/lastwill.txt.asc"
+              >download it directly</a
+            >
+            from <code>unpkg.com</code>
+          </p>
         </div>
 
         <div class="col-6">
-            <label>
-                <b><i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp;&nbsp;Beacon</b>
-                (
-                {{if .Alive}}
-                    <b class="text-success"><i class="fa fa-check-circle-o"></i> Alive</b>
-                {{else}}
-                    <b class="text-danger"><i class="fa fa-times-circle-o"></i> Not Alive</b>
-                {{end}}
-                )
-            </label>
-            <p><code>{{.Beacon}}</code></p>
+          <h5>
+            <i class="fa fa-lightbulb-o me-2" aria-hidden="true"></i>
+            <span>Beacon [</span>
+            {{if .Alive}}
+            <b class="text-success"
+              ><i class="fa fa-check-circle-o"></i>Alive</b
+            >
+            {{else}}
+            <b class="text-danger"
+              ><i class="fa fa-times-circle-o"></i>Not Alive</b
+            >
+            {{ end }}
+            <span>]</span>
+          </h5>
+          <p>
+            <code>{{.Beacon}}</code>
+          </p>
         </div>
 
         <div class="col-6">
-            <label><b><i class="fa fa-lock"></i>&nbsp;&nbsp;Decryption Key</b></label>
-            <p><code>{{.SecretKey}}</code></p>
+          <h5>
+            <i class="fa fa-lock me-2"></i>
+            <span>Decryption Key</span>
+          </h5>
+          <p>
+            <code>{{.SecretKey}}</code>
+          </p>
         </div>
+      </div>
     </div>
-</div>
-
-</body>
-
+  </body>
 </html>
