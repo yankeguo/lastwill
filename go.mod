@@ -1,3 +1,3 @@
-module github.com/guoyk93/lastwill
+module github.com/yankeguo/lastwill
 
 go 1.21
