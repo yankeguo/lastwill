@@ -19,7 +19,7 @@ const (
 	FileBeacon   = "beacon.txt"
 )
 
-func LoadBeacon() (beacon string, alive bool, err error) {
+func LoadBeacon() (beacon string, active bool, err error) {
 	log.Println("loading beacon:", FileBeacon)
 
 	var buf []byte
@@ -34,10 +34,10 @@ func LoadBeacon() (beacon string, alive bool, err error) {
 		return
 	}
 
-	beacon, alive = t.Format("2006-01-02 15:04:05 (-0700)"), time.Now().Sub(t) < DisclosureTerm
+	beacon, active = t.Format("2006-01-02 15:04:05 (-0700)"), time.Now().Sub(t) < DisclosureTerm
 
 	log.Println("beacon:", beacon)
-	log.Println("beacon alive:", alive)
+	log.Println("beacon active:", active)
 
 	return
 }
