@@ -6,74 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/bootswatch@5.3.2/dist/darkly/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"
+      href="https://unpkg.com/bootswatch@5.3.2/dist/cyborg/bootstrap.min.css"
     />
   </head>
 
   <body>
-    <div class="container">
+    <div class="container pt-5">
       <div class="row">
-        <div class="col-12 mt-5 mb-3">
-          <h3>Yanke Guo's Last Will</h3>
-        </div>
-        <div class="col-12">
-          <p>I've built an automatic disclosure system for my last will</p>
-          <p>
-            If I failed to renew the beacon file for 21 days, the decryption key
-            of my last will will be disclosed automatically
-          </p>
-        </div>
+        <div class="col-12 col-md-6 offset-md-3">
+          <div class="row">
+            <div class="col-12 pt-4 pb-4">
+              <h3>Yanke Guo's Last Will</h3>
+              <p>I've built an automatic disclosure system for my last will</p>
+              <p>
+                If I failed to renew the beacon file for <em>21 days</em>, the
+                decryption key of my last will will be disclosed automatically
+              </p>
+              <p>
+                The encrypted file is already published to a npm package
+                <a
+                  target="_blank"
+                  href="https://www.npmjs.com/package/@yankeguo/lastwill-data"
+                  >@yankeguo/lastwill-data</a
+                >
+                , or you can
+                <a
+                  target="_blank"
+                  href="https://unpkg.com/@yankeguo/lastwill-data/lastwill.html.asc"
+                  >download it directly</a
+                >
+                from <em>unpkg.com</em>
+              </p>
+            </div>
 
-        <div class="col-12">
-          <p>
-            The encrypted file is already published to a npm package
-            <a
-              target="_blank"
-              href="https://www.npmjs.com/package/@yankeguo/lastwill-data"
-              >@yankeguo/lastwill-data</a
-            >
-            , or you can
-            <a
-              target="_blank"
-              href="https://unpkg.com/@yankeguo/lastwill-data/lastwill.html.asc"
-              >download it directly</a
-            >
-            from <code>unpkg.com</code>
-          </p>
-        </div>
-
-        <div class="col-6">
-          <h5>
-            <i class="fa fa-lightbulb-o me-2" aria-hidden="true"></i>
-            <span>Beacon [</span>
-            {{if .Alive}}
-            <b class="text-success"
-              ><i class="fa fa-check-circle-o"></i>Alive</b
-            >
-            {{else}}
-            <b class="text-danger"
-              ><i class="fa fa-times-circle-o"></i>Not Alive</b
-            >
+            {{if .Active}}
+            <div class="col-12">
+              <div
+                class="alert alert-success d-flex flex-row justify-content-between align-items-center"
+              >
+                <span><b>STATUS:</b> ACTIVE</span>
+                <span>{{ .Beacon }}</span>
+              </div>
+            </div>
+            {{ else }}
+            <div class="col-12">
+              <div
+                class="alert alert-danger d-flex flex-row justify-content-between align-items-center"
+              >
+                <span><b>STATUS:</b> INACTIVE</span>
+                <span>{{ .Beacon }}</span>
+              </div>
+            </div>
             {{ end }}
-            <span>]</span>
-          </h5>
-          <p>
-            <code>{{.Beacon}}</code>
-          </p>
-        </div>
 
-        <div class="col-6">
-          <h5>
-            <i class="fa fa-lock me-2"></i>
-            <span>Decryption Key</span>
-          </h5>
-          <p>
-            <code>{{.SecretKey}}</code>
-          </p>
+            <div class="col-12">
+              <div
+                class="alert alert-light d-flex flex-row justify-content-between align-items-center"
+              >
+                <span><b>DECRYPTION KEY</b></span>
+                <span>
+                  <code>{{ .Secret}}</code>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

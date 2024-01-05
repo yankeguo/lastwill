@@ -2,7 +2,7 @@ name: github-pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   schedule:
     - cron: "10 2 * * *"
   workflow_dispatch:
@@ -38,7 +38,7 @@ jobs:
       - name: upload pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: '.'
+          path: "."
       - name: deploy pages
         id: deployment
         uses: actions/deploy-pages@v2

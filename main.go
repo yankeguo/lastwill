@@ -75,9 +75,9 @@ func RenderIndexHTML(data Data) (err error) {
 }
 
 type Data struct {
-	Beacon    string
-	Alive     bool
-	SecretKey string
+	Beacon string
+	Active bool
+	Secret string
 }
 
 func main() {
@@ -92,14 +92,14 @@ func main() {
 
 	var data Data
 
-	if data.Beacon, data.Alive, err = LoadBeacon(); err != nil {
+	if data.Beacon, data.Active, err = LoadBeacon(); err != nil {
 		return
 	}
 
-	if data.Alive {
-		data.SecretKey = "N/A"
+	if data.Active {
+		data.Secret = "N/A"
 	} else {
-		data.SecretKey = strings.TrimSpace(os.Getenv(EnvKeySecret))
+		data.Secret = strings.TrimSpace(os.Getenv(EnvKeySecret))
 	}
 
 	if err = RenderIndexHTML(data); err != nil {
