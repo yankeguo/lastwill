@@ -28,7 +28,7 @@ jobs:
       - name: setup go
         uses: actions/setup-go@v4
         with:
-          go-version: "^1.21.0"
+          go-version: oldstable
       - name: render index.html
         run: go run main.go
         env:
