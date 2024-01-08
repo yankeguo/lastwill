@@ -17,6 +17,9 @@ const (
 	FileTemplate = "index.gohtml"
 	FileIndex    = "index.html"
 	FileBeacon   = "beacon.txt"
+
+	TimeLayoutBeacon = time.RFC3339
+	TimeLayoutOutput = "2006-01-02 15:04:05 (-0700)"
 )
 
 func LoadBeacon() (beacon string, active bool, err error) {
@@ -30,11 +33,11 @@ func LoadBeacon() (beacon string, active bool, err error) {
 	log.Println("parsing beacon:", string(buf))
 
 	var t time.Time
-	if t, err = time.Parse(time.RFC3339, string(bytes.TrimSpace(buf))); err != nil {
+	if t, err = time.Parse(TimeLayoutBeacon, string(bytes.TrimSpace(buf))); err != nil {
 		return
 	}
 
-	beacon, active = t.Format("2006-01-02 15:04:05 (-0700)"), time.Now().Sub(t) < DisclosureTerm
+	beacon, active = t.Format(TimeLayoutOutput), time.Since(t) < DisclosureTerm
 
 	log.Println("beacon:", beacon)
 	log.Println("beacon active:", active)
@@ -78,6 +81,7 @@ type Data struct {
 	Beacon string
 	Active bool
 	Secret string
+	Now    string
 }
 
 func main() {
@@ -91,6 +95,8 @@ func main() {
 	}()
 
 	var data Data
+
+	data.Now = time.Now().Format(TimeLayoutOutput)
 
 	if data.Beacon, data.Active, err = LoadBeacon(); err != nil {
 		return
