@@ -78,12 +78,14 @@ func createIndexFileFromBeaconFile(now time.Time, input string, output string) (
 		opts.SecretKey = strings.TrimSpace(os.Getenv("SECRET_KEY"))
 	}
 
-	log.Printf("options: %+v", opts)
+	log.Printf("options: current_data=%s, beacon_color=%s, beacon_status=%s", opts.CurrentDate, opts.BeaconColor, opts.BeaconStatus)
 
 	var out []byte
 	if out, err = renderIndex(opts); err != nil {
 		return
 	}
+
+	log.Println("rendered:", output)
 
 	if err = os.WriteFile(output, out, 0644); err != nil {
 		return
