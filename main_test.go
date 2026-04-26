@@ -76,10 +76,10 @@ func TestRenderIndex(t *testing.T) {
 	})
 	require.NoError(t, err)
 	require.Contains(t, string(buf), "<em>114</em>")
-	require.Contains(t, string(buf), "alert-514")
+	require.Contains(t, string(buf), "status-514")
 	require.Contains(t, string(buf), "BEACON 1919")
 	require.Contains(t, string(buf), "<span>810</span>")
-	require.Contains(t, string(buf), "<code>801</code>")
+	require.Contains(t, string(buf), ">801</code>")
 	require.NotContains(t, string(buf), "___")
 }
 
@@ -115,10 +115,10 @@ func TestCreateIndexFromBeaconFile(t *testing.T) {
 	buf, err := os.ReadFile(output)
 	require.NoError(t, err)
 	require.Contains(t, string(buf), "<em>"+now.Format(time.RFC3339)+"</em>")
-	require.Contains(t, string(buf), "alert-success")
+	require.Contains(t, string(buf), "status-success")
 	require.Contains(t, string(buf), "BEACON ACTIVE")
 	require.Contains(t, string(buf), "<span>"+bct+"</span>")
-	require.Contains(t, string(buf), "<code>N/A</code>")
+	require.Contains(t, string(buf), ">N/A</code>")
 
 	bct = now.Add(-DisclosureTerm * 2).Format(time.RFC3339)
 
@@ -130,10 +130,10 @@ func TestCreateIndexFromBeaconFile(t *testing.T) {
 	buf, err = os.ReadFile(output)
 	require.NoError(t, err)
 	require.Contains(t, string(buf), "<em>"+now.Format(time.RFC3339)+"</em>")
-	require.Contains(t, string(buf), "alert-danger")
+	require.Contains(t, string(buf), "status-danger")
 	require.Contains(t, string(buf), "BEACON INACTIVE")
 	require.Contains(t, string(buf), "<span>"+bct+"</span>")
-	require.Contains(t, string(buf), "<code>1145141919810</code>")
+	require.Contains(t, string(buf), ">1145141919810</code>")
 }
 
 func TestCreateIndexFromBeaconFile_MissingInput(t *testing.T) {
@@ -174,7 +174,7 @@ func TestCreateIndexFromBeaconFile_EmptySecretKey(t *testing.T) {
 
 	buf, err := os.ReadFile(output)
 	require.NoError(t, err)
-	require.Contains(t, string(buf), "alert-danger")
+	require.Contains(t, string(buf), "status-danger")
 	require.Contains(t, string(buf), "BEACON INACTIVE")
-	require.Contains(t, string(buf), "<code></code>")
+	require.Contains(t, string(buf), "></code>")
 }
