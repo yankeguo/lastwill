@@ -24,9 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: setup go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version: oldstable
       - name: render index.html
@@ -34,11 +34,11 @@ jobs:
         env:
           SECRET_KEY: ${{secrets.SECRET_KEY}}
       - name: configure pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: upload pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: "."
       - name: deploy pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
