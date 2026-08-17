@@ -15,7 +15,7 @@
 # vendor/
 
 # Generated
-/index.html
+/dist/
 /lastwill
 
 # GoLand

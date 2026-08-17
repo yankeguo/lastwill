@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -89,11 +90,15 @@ func createIndexFileFromBeaconFile(now time.Time, input string, output string) e
 
 	log.Println("rendered:", output)
 
+	if err = os.MkdirAll(filepath.Dir(output), 0755); err != nil {
+		return err
+	}
+
 	return os.WriteFile(output, out, 0644)
 }
 
 func main() {
-	if err := createIndexFileFromBeaconFile(time.Now(), "beacon.txt", "index.html"); err != nil {
+	if err := createIndexFileFromBeaconFile(time.Now(), "beacon.txt", "dist/index.html"); err != nil {
 		log.Fatal("exited with error: ", err)
 	}
 }

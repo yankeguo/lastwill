@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"path/filepath"
 	"testing"
 	"time"
 
@@ -172,4 +173,20 @@ func TestCreateIndexFromBeaconFile_EmptySecretKey(t *testing.T) {
 	require.Contains(t, string(buf), "status-danger")
 	require.Contains(t, string(buf), "BEACON INACTIVE")
 	require.Contains(t, string(buf), "></code>")
+}
+
+func TestCreateIndexFromBeaconFile_CreatesOutputDir(t *testing.T) {
+	input := filepath.Join(t.TempDir(), "beacon.txt")
+	output := filepath.Join(t.TempDir(), "dist", "index.html")
+
+	now := time.Date(2021, 8, 10, 0, 0, 0, 0, time.UTC)
+	bct := now.Add(-DisclosureTerm / 2).Format(time.RFC3339)
+
+	require.NoError(t, os.WriteFile(input, []byte(bct), 0644))
+
+	require.NoError(t, createIndexFileFromBeaconFile(now, input, output))
+
+	buf, err := os.ReadFile(output)
+	require.NoError(t, err)
+	require.Contains(t, string(buf), "BEACON ACTIVE")
 }

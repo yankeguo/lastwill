@@ -46,7 +46,7 @@ jobs:
       - name: upload pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: "index.html"
+          path: "dist"
       - name: deploy pages
         id: deployment
         uses: actions/deploy-pages@v5
