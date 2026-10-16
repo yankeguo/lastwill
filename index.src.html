@@ -5,6 +5,7 @@
   <title>Yan-ke Guo's Last Will</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'" />
   <style>
     * {
       margin: 0;
@@ -84,11 +85,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.35rem 1rem;
       padding: 1rem 1.25rem;
       border-radius: 8px;
       margin-top: 1.5rem;
       font-size: 0.875rem;
       font-weight: 600;
+    }
+
+    .status span {
+      white-space: nowrap;
     }
 
     .status-success {
@@ -122,10 +129,17 @@
     }
 
     .key-value {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin-inline: auto;
       font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
       font-size: 0.9375rem;
       color: #f0f6fc;
       word-break: break-all;
+      white-space: pre-wrap;
+      user-select: all;
+      text-align: left;
       line-height: 1.5;
     }
 
@@ -151,28 +165,28 @@
     <p>I've built an automatic disclosure system for my last will.</p>
 
     <p>
-      If I failed to renew the beacon file for <em>21 days</em>, the
+      If I failed to renew the beacon file for <em>{{.DisclosureDays}} days</em>, the
       decryption key of my last will will be disclosed automatically.
     </p>
 
     <p>
       The encrypted file is already published to an npm package
-      <a target="_blank" href="https://www.npmjs.com/package/@yankeguo/lastwill-data">@yankeguo/lastwill-data</a>,
-      or you can <a target="_blank" href="https://unpkg.com/@yankeguo/lastwill-data/lastwill.html.asc">download it
+      <a target="_blank" rel="noopener noreferrer" href="https://www.npmjs.com/package/@yankeguo/lastwill-data">@yankeguo/lastwill-data</a>,
+      or you can <a target="_blank" rel="noopener noreferrer" href="https://unpkg.com/@yankeguo/lastwill-data/lastwill.html.asc">download it
         directly</a>
       from <em>unpkg.com</em>.
     </p>
 
-    <div class="updated">Updated at <em>___CURRENT_DATE___</em></div>
+    <div class="updated">Updated at <em translate="no">{{.CurrentDate}}</em></div>
 
-    <div class="status status-___BEACON_COLOR___">
-      <span>BEACON ___BEACON_STATUS___</span>
-      <span>___BEACON_DATE___</span>
+    <div class="status status-{{.BeaconColor}}">
+      <span>BEACON {{.BeaconStatus}}</span>
+      <span translate="no">{{.BeaconDate}}</span>
     </div>
 
     <div class="key-box">
       <div class="key-label">Decryption Key</div>
-      <code class="key-value">___SECRET_KEY___</code>
+      <code class="key-value" translate="no">{{.SecretKey}}</code>
     </div>
   </div>
 </body>

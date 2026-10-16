@@ -20,7 +20,3 @@
 
 # GoLand
 .idea/
-
-# Test
-/beacon.test.txt
-/index.test.html
