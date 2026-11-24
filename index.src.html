@@ -143,6 +143,29 @@
       line-height: 1.5;
     }
 
+    .steps {
+      margin: 0 0 1rem 1.25rem;
+      font-size: 0.9375rem;
+    }
+
+    .steps li {
+      margin-bottom: 0.75rem;
+      padding-left: 0.25rem;
+    }
+
+    .command {
+      margin: 0.5rem 0 1rem;
+      padding: 0.75rem 1rem;
+      background-color: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: #f0f6fc;
+    }
+
     @media (max-width: 480px) {
       .card {
         padding: 1.5rem;
@@ -170,11 +193,35 @@
     </p>
 
     <p>
-      The encrypted file is already published to an npm package
-      <a target="_blank" rel="noopener noreferrer" href="https://www.npmjs.com/package/@yankeguo/lastwill-data">@yankeguo/lastwill-data</a>,
-      or you can <a target="_blank" rel="noopener noreferrer" href="https://unpkg.com/@yankeguo/lastwill-data/lastwill.html.asc">download it
-        directly</a>
-      from <em>unpkg.com</em>.
+      The encrypted payload and decryption tool are bundled in the self-decrypting npm package
+      <a target="_blank" rel="noopener noreferrer" href="https://www.npmjs.com/package/@yankeguo/lastwill-data">@yankeguo/lastwill-data</a>.
+      You do not need to download a ciphertext file, copy the beacon, or clone the repository.
+    </p>
+
+    <p>When a decryption key replaces <em>N/A</em> below:</p>
+
+    <ol class="steps">
+      <li>
+        Install <a target="_blank" rel="noopener noreferrer" href="https://nodejs.org/">Node.js</a> (which includes npm), then run:
+        <pre class="command" translate="no">npx @yankeguo/lastwill-data</pre>
+      </li>
+      <li>
+        At the <code>Decryption password:</code> prompt, paste the key shown below. Your input is hidden.
+        The decrypted Markdown document is printed to the terminal by default.
+      </li>
+      <li>
+        To print HTML instead, run:
+        <pre class="command" translate="no">npx @yankeguo/lastwill-data --format html</pre>
+      </li>
+    </ol>
+
+    <p>For repeated use, you can install the command globally:</p>
+    <pre class="command" translate="no">npm install --global @yankeguo/lastwill-data
+yankeguo-lastwill-data</pre>
+
+    <p>
+      <em>Privacy:</em> use a private terminal. Decrypted content is written to standard output;
+      do not expose it in public logs, issues, chats, or screenshots. If you save it, protect the file as sensitive.
     </p>
 
     <div class="updated">Updated at <em translate="no">{{.CurrentDate}}</em></div>
