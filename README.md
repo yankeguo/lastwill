@@ -17,8 +17,6 @@ npx @yankeguo/lastwill-data --format html
 
 Paste the key at the hidden `Decryption password:` prompt. The CLI prints decrypted Markdown by default, or HTML with `--format html`, to standard output. Use a private terminal and protect any saved output as sensitive.
 
-For repeated use, install the CLI globally with `npm install --global @yankeguo/lastwill-data`, then run `yankeguo-lastwill-data`.
-
 ## Credits
 
 Y.-K. Guo, MIT License
