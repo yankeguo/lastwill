@@ -18,11 +18,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  # Build and deploy must be separate jobs: deploy-pages lists this run's
+  # artifacts immediately, and an upload in the same job is not always
+  # visible to that lookup yet (actions/deploy-pages#451).
+  build:
     timeout-minutes: 10
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -61,6 +61,15 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: "dist"
+
+  deploy:
+    needs: build
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: deploy pages
         id: deployment
         uses: actions/deploy-pages@v5
